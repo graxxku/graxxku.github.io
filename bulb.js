@@ -70,8 +70,9 @@ function handleNotif(event) {
   }
 
 function powerOn() {
-  let data = new Uint8Array([0xcc, 0x23, 0x33]);
-  return ledCharacteristic.writeValue(data)
+    const string = "alarm:on";
+    const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
+  return sendmode.writeValue(uint8Array)
       .catch(err => console.log('Error when powering on! ', err))
       .then(() => {
           poweredOn = true;
@@ -80,8 +81,9 @@ function powerOn() {
 }
 
 function powerOff() {
-  let data = new Uint8Array([0xcc, 0x24, 0x33]);
-  return ledCharacteristic.writeValue(data)
+    const string = "alarm:off";
+    const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
+  return sendmode.writeValue(uint8Array)
       .catch(err => console.log('Error when switching off! ', err))
       .then(() => {
           poweredOn = false;
