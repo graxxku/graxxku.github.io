@@ -1,8 +1,6 @@
 'use strict';
 
 let ledCharacteristic = null;
-let tess = null;
-let sendmode = null;
 let poweredOn = false;
 
 function onConnected() {
@@ -21,10 +19,10 @@ function onDisconnected() {
 }
 
 function connect() {
-    console.log('tes5');
+    console.log('Requesting Bluetooth Device...');
     navigator.bluetooth.requestDevice(
         {
-            acceptAllDevices: true
+            acceptAllDevices:true
         })
         .then(device => {
             console.log('> Found ' + device.name);
@@ -33,19 +31,16 @@ function connect() {
             return device.gatt.connect();
         })
         .then(server => {
-            console.log('Getting Service');
-            return server.getPrimaryService('6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
+            console.log('Getting Service 0xffe5 - Light control...');
+            return server.getPrimaryService(0xffe5);
         })
         .then(service => {
-            //create notification
-            tess = service;
-            return service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
+            console.log('Getting Characteristic 0xffe9 - Light control...');
+            return service.getCharacteristic(0xffe9);
         })
         .then(characteristic => {
+            console.log('All ready!');
             ledCharacteristic = characteristic;
-            ledCharacteristic.addEventListener('characteristicvaluechanged',handleNotif);
-            ledCharacteristic.startNotifications();
-            enableSend();
             onConnected();
         })
         .catch(error => {
@@ -53,22 +48,9 @@ function connect() {
         });
 }
 
-function enableSend(){
-    return tess.getCharacteristic('6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()).then(temp =>
-        {
-            sendmode = temp;
-        }    
-    )
-}
-
-function handleNotif(event) {
-    console.log(event.target.value);
-  }
-
 function powerOn() {
-    const string = "alarm:on";
-    const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
-  return sendmode.writeValue(uint8Array)
+  let data = new Uint8Array([0xcc, 0x23, 0x33]);
+  return ledCharacteristic.writeValue(data)
       .catch(err => console.log('Error when powering on! ', err))
       .then(() => {
           poweredOn = true;
@@ -77,9 +59,8 @@ function powerOn() {
 }
 
 function powerOff() {
-    const string = "alarm:off";
-    const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
-  return sendmode.writeValue(uint8Array)
+  let data = new Uint8Array([0xcc, 0x24, 0x33]);
+  return ledCharacteristic.writeValue(data)
       .catch(err => console.log('Error when switching off! ', err))
       .then(() => {
           poweredOn = false;
@@ -103,11 +84,8 @@ function toggleButtons() {
 }
 
 function setColor(red, green, blue) {
-    const string = "refresh";
-    const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
-
-    //let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
-    return sendmode.writeValue(uint8Array)
+    let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
+    return ledCharacteristic.writeValue(data)
         .catch(err => console.log('Error when writing value! ', err));
 }
 
@@ -125,6 +103,25 @@ function blue() {
     return setColor(0, 0, 255)
         .then(() => console.log('Color set to Blue'));
 }
+
+function listen() {
+    annyang.start({ continuous: true });
+}
+
+// Voice commands
+annyang.addCommands({
+    'red': red,
+    'green': green,
+    'blue': blue,
+    'yellow': () => setColor(127, 127, 0),
+    'orange': () => setColor(127, 35, 0),
+    'purple': () => setColor(127, 0, 127),
+    'pink': () => setColor(180, 12, 44),
+    'cyan': () => setColor(0, 127, 127),
+    'white': () => setColor(127, 127, 127),
+    'turn on': powerOn,
+    'turn off': powerOff
+});
 
 // Install service worker - for offline support
 if ('serviceWorker' in navigator) {
