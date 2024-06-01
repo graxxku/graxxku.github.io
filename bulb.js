@@ -22,7 +22,8 @@ function connect() {
     console.log('tes1');
     navigator.bluetooth.requestDevice(
         {
-            filters: [{ name: ["glert"] }]
+            filters: [{ name: ["glert"] }],
+            optionalServices: ['6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase(),'6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()],
         })
         .then(device => {
             console.log('> Found ' + device.name);
