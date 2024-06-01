@@ -32,11 +32,11 @@ function connect() {
         })
         .then(server => {
             console.log('Getting Service');
-            return server.getPrimaryService('6E400001-B5A3-F393-E0A9-E50E24DCCA9E');
+            return server.getPrimaryService('6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
         })
         .then(service => {
             console.log('Getting Characteristic');
-            return service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E');
+            return service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
         })
         .then(characteristic => {
             console.log(characteristic);
