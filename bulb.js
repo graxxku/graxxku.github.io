@@ -46,6 +46,7 @@ function connect() {
             ];
         })
         .then(characteristics => {
+            console.log(characteristics);
             writeCharacter = characteristics[0];
             notifyCharacter = characteristics[1];
             notifyCharacter.addEventListener('characteristicvaluechanged',handleNotif);
