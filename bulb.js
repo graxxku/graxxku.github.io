@@ -22,12 +22,13 @@ function connect() {
     console.log('Requesting Bluetooth Device...');
     navigator.bluetooth.requestDevice(
         {
-            filters: [{ services: [0xffe5] }]
+            filters: [{ name: ["glert"] }]
         })
         .then(device => {
             console.log('> Found ' + device.name);
             console.log('Connecting to GATT Server...');
             device.addEventListener('gattserverdisconnected', onDisconnected)
+            console.log(device);
             return device.gatt.connect();
         })
         .then(server => {
@@ -39,8 +40,7 @@ function connect() {
             return service.getCharacteristic(0xffe9);
         })
         .then(characteristic => {
-            console.log('All ready!');
-            ledCharacteristic = characteristic;
+            console.log(characteristic);
             onConnected();
         })
         .catch(error => {
@@ -103,25 +103,6 @@ function blue() {
     return setColor(0, 0, 255)
         .then(() => console.log('Color set to Blue'));
 }
-
-function listen() {
-    annyang.start({ continuous: true });
-}
-
-// Voice commands
-annyang.addCommands({
-    'red': red,
-    'green': green,
-    'blue': blue,
-    'yellow': () => setColor(127, 127, 0),
-    'orange': () => setColor(127, 35, 0),
-    'purple': () => setColor(127, 0, 127),
-    'pink': () => setColor(180, 12, 44),
-    'cyan': () => setColor(0, 127, 127),
-    'white': () => setColor(127, 127, 127),
-    'turn on': powerOn,
-    'turn off': powerOff
-});
 
 // Install service worker - for offline support
 if ('serviceWorker' in navigator) {
