@@ -19,7 +19,7 @@ function onDisconnected() {
 }
 
 function connect() {
-    console.log('Requesting Bluetooth Device...');
+    console.log('tes1');
     navigator.bluetooth.requestDevice(
         {
             filters: [{ name: ["glert"] }]
@@ -28,25 +28,32 @@ function connect() {
             console.log('> Found ' + device.name);
             console.log('Connecting to GATT Server...');
             device.addEventListener('gattserverdisconnected', onDisconnected)
-            console.log(device);
             return device.gatt.connect();
         })
         .then(server => {
-            console.log('Getting Service 0xffe5 - Light control...');
-            return server.getPrimaryService(0xffe5);
+            console.log('Getting Service');
+            return server.getPrimaryService('6E400001-B5A3-F393-E0A9-E50E24DCCA9E');
         })
         .then(service => {
-            console.log('Getting Characteristic 0xffe9 - Light control...');
-            return service.getCharacteristic(0xffe9);
+            console.log('Getting Characteristic');
+            return service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E');
         })
         .then(characteristic => {
             console.log(characteristic);
+            ledCharacteristic = characteristic;
+            ledCharacteristic.addEventListener('characteristicvaluechanged',handleNotif);
+            ledCharacteristic.startNotifications();
             onConnected();
         })
         .catch(error => {
             console.log('Argh! ' + error);
         });
 }
+
+
+function handleNotif(event) {
+    console.log(event);
+  }
 
 function powerOn() {
   let data = new Uint8Array([0xcc, 0x23, 0x33]);
