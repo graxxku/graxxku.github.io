@@ -19,7 +19,7 @@ function onDisconnected() {
 }
 
 function connect() {
-    console.log('tes1');
+    console.log('tes2');
     navigator.bluetooth.requestDevice(
         {
             filters: [{ name: ["glert"] }],
@@ -40,7 +40,6 @@ function connect() {
             return service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
         })
         .then(characteristic => {
-            console.log(characteristic);
             ledCharacteristic = characteristic;
             ledCharacteristic.addEventListener('characteristicvaluechanged',handleNotif);
             ledCharacteristic.startNotifications();
@@ -53,7 +52,7 @@ function connect() {
 
 
 function handleNotif(event) {
-    console.log(event);
+    console.log(event.target.value);
   }
 
 function powerOn() {
@@ -92,8 +91,9 @@ function toggleButtons() {
 }
 
 function setColor(red, green, blue) {
-    let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
-    return ledCharacteristic.writeValue(data)
+    const msg = Array.from("refresh", char => char.charCodeAt(0));
+    //let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
+    return ledCharacteristic.writeValue(msg)
         .catch(err => console.log('Error when writing value! ', err));
 }
 
