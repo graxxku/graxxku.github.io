@@ -105,9 +105,11 @@ function toggleButtons() {
 }
 
 function setColor(red, green, blue) {
-    const msg = Array.from("refresh", char => char.charCodeAt(0));
+    const string = "refresh";
+    const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
+
     //let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
-    return sendmode.writeValue(msg)
+    return sendmode.writeValue(uint8Array)
         .catch(err => console.log('Error when writing value! ', err));
 }
 
