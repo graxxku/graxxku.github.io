@@ -20,12 +20,13 @@ function onDisconnected() {
 }
 
 function connect() {
-    console.log('tes3');
+    console.log('tes4');
     navigator.bluetooth.requestDevice(
         {
             filters: [{ name: ["glert"] }],
             optionalServices: [
                 '6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase(),
+                '6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase(),
                 '6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()],
         })
         .then(device => {
@@ -39,16 +40,21 @@ function connect() {
             return server.getPrimaryService('6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
         })
         .then(service => {
-            //create notification
-            return [
-                service.getCharacteristic('6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()),
-                service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase())
-            ];
+            return service.getCharacteristics();
         })
         .then(characteristics => {
-            console.log(characteristics);
-            writeCharacter = characteristics[0];
-            notifyCharacter = characteristics[1];
+            let queue = Promise.resolve();
+            characteristics.forEach(characteristic => {
+            switch (characteristic.uuid) {
+                case BluetoothUUID.getCharacteristic('6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()):
+                queue = queue.then(_ => {writeCharacter = characteristic});
+                break;
+
+                case BluetoothUUID.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()):
+                queue = queue.then(_ => {notifyCharacter = characteristic});
+                break;
+            }
+            });
             notifyCharacter.addEventListener('characteristicvaluechanged',handleNotif);
             notifyCharacter.startNotifications();
             onConnected();
