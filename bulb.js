@@ -24,7 +24,7 @@ function connect() {
     console.log('tes5');
     navigator.bluetooth.requestDevice(
         {
-            filters: [{ name: ["glert"] }],
+            acceptAllDevices: true,
             optionalServices: [
                 '6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase(),
                 '6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase(),
