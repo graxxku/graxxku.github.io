@@ -1,6 +1,7 @@
 'use strict';
 
-let ledCharacteristic = null;
+let notifyCharacter = null;
+let writeCharacter = null;
 let poweredOn = false;
 
 function onConnected() {
@@ -19,11 +20,13 @@ function onDisconnected() {
 }
 
 function connect() {
-    console.log('tes2');
+    console.log('tes3');
     navigator.bluetooth.requestDevice(
         {
             filters: [{ name: ["glert"] }],
-            optionalServices: ['6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase(),'6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()],
+            optionalServices: [
+                '6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase(),
+                '6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()],
         })
         .then(device => {
             console.log('> Found ' + device.name);
@@ -36,13 +39,17 @@ function connect() {
             return server.getPrimaryService('6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
         })
         .then(service => {
-            console.log('Getting Characteristic');
-            return service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
+            //create notification
+            return [
+                service.getCharacteristic('6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()),
+                service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase())
+            ];
         })
-        .then(characteristic => {
-            ledCharacteristic = characteristic;
-            ledCharacteristic.addEventListener('characteristicvaluechanged',handleNotif);
-            ledCharacteristic.startNotifications();
+        .then(characteristics => {
+            writeCharacter = characteristics[0];
+            notifyCharacter = characteristics[1];
+            notifyCharacter.addEventListener('characteristicvaluechanged',handleNotif);
+            notifyCharacter.startNotifications();
             onConnected();
         })
         .catch(error => {
@@ -57,7 +64,7 @@ function handleNotif(event) {
 
 function powerOn() {
   let data = new Uint8Array([0xcc, 0x23, 0x33]);
-  return ledCharacteristic.writeValue(data)
+  return writeCharacter.writeValue(data)
       .catch(err => console.log('Error when powering on! ', err))
       .then(() => {
           poweredOn = true;
@@ -67,7 +74,7 @@ function powerOn() {
 
 function powerOff() {
   let data = new Uint8Array([0xcc, 0x24, 0x33]);
-  return ledCharacteristic.writeValue(data)
+  return writeCharacter.writeValue(data)
       .catch(err => console.log('Error when switching off! ', err))
       .then(() => {
           poweredOn = false;
@@ -87,30 +94,15 @@ function toggleButtons() {
     Array.from(document.querySelectorAll('.color-buttons button')).forEach(function(colorButton) {
       colorButton.disabled = !poweredOn;
     });
-    document.querySelector('.mic-button button').disabled = !poweredOn;
 }
 
-function setColor(red, green, blue) {
+function setColor() {
     const msg = Array.from("refresh", char => char.charCodeAt(0));
     //let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
-    return ledCharacteristic.writeValue(msg)
+    return writeCharacter.writeValue(msg)
         .catch(err => console.log('Error when writing value! ', err));
 }
 
-function red() {
-    return setColor(255, 0, 0)
-        .then(() => console.log('Color set to Red'));
-}
-
-function green() {
-    return setColor(0, 255, 0)
-        .then(() => console.log('Color set to Green'));
-}
-
-function blue() {
-    return setColor(0, 0, 255)
-        .then(() => console.log('Color set to Blue'));
-}
 
 // Install service worker - for offline support
 if ('serviceWorker' in navigator) {
