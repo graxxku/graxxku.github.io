@@ -14,7 +14,7 @@ tabContents.forEach(content => {
 });
 
 tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
+    tab.addEventListener('touchend', () => {
         // Hide all tab contents
         tabContents.forEach(content => {
             content.style.display = 'none';
