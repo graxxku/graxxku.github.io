@@ -3,6 +3,28 @@
 let ledCharacteristic = null;
 let poweredOn = false;
 
+function toggleContent() {
+    const setting1Content = document.getElementById('setting1-content');
+    setting1Content.style.display = (setting1Content.style.display === 'none') ? 'block' : 'none';
+}
+const tabs = document.querySelectorAll('.tabs li');
+const tabContents = document.querySelectorAll('.tab-content');
+tabContents.forEach(content => {
+            content.style.display = 'none';
+});
+
+tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+        // Hide all tab contents
+        tabContents.forEach(content => {
+            content.style.display = 'none';
+        });
+
+        // Show the selected tab content
+        tabContents[index].style.display = 'block';
+    });
+});
+
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
     document.querySelector('.color-buttons').classList.remove('hidden');
