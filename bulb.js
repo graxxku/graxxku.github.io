@@ -13,17 +13,18 @@ tabContents.forEach(content => {
             content.style.display = 'none';
 });
 
-tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-        // Hide all tab contents
-        tabContents.forEach(content => {
-            content.style.display = 'none';
-        });
-
-        // Show the selected tab content
-        tabContents[index].style.display = 'block';
+function home(){
+    tabContents.forEach(content => {
+        content.style.display = 'none';
     });
-});
+    tabContents[0].style.display = 'block';
+}
+function settings(){
+    tabContents.forEach(content => {
+        content.style.display = 'none';
+    });
+    tabContents[1].style.display = 'block';
+}
 
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
