@@ -49,7 +49,7 @@ i.material-icons {
     display: flex;
     background-color: #f1f1f1;
     justify-content: center; /* Center-align the tabs */
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
 }
