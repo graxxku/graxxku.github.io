@@ -2,6 +2,16 @@
 <html>
 
 <head>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.init({
+        appId: "a959b1d7-1eb0-433a-83b5-6db72f45c64f",
+        });
+    });
+    </script>
+    
     <title>Graxx Alert</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +29,7 @@
 
         <main class="mdl-layout__content">
 
-            <h3>Web Light Bulb</h3>
+            <h3>Graxx Alert</h3>
             <button onclick="home()" class=" connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                 <i class="material-icons">home</i> Home
             </button>
@@ -54,10 +64,7 @@
 
     </div>
 
-    <!-- <ul class="tabs">
-        <button onclick="home()">Home</button>
-        <button onclick="settings()">Settings</button>
-    </ul> -->
+
 
     <script src="bulb.js"></script>
 </body>

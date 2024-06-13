@@ -43,33 +43,6 @@ i.material-icons {
     display: none;
 }
 
-
-.tabs {
-    list-style: none;
-    display: flex;
-    background-color: #f1f1f1;
-    justify-content: center; /* Center-align the tabs */
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.tabs li {
-    margin-left: 10px;
-}
-
-.tabs a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.tabs a:hover {
-    background-color: #ddd;
-}
-
 .tab-content-container {
     display: flex;
     justify-content: center; /* Center horizontally */

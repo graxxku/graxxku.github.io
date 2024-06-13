@@ -1,31 +1,9 @@
 'use strict';
 
-let notifCharacteristic = null;
-let sendCharacteristic = null;
+let ledCharacteristic = null;
+let tess = null;
+let sendmode = null;
 let poweredOn = false;
-
-
-function toggleContent() {
-    const setting1Content = document.getElementById('setting1-content');
-    setting1Content.style.display = (setting1Content.style.display === 'none') ? 'block' : 'none';
-}
-
-const tabContents = document.querySelectorAll('.tab-content');
-tabContents.forEach(content => {
-            content.style.display = 'none';
-});
-function home(){
-    tabContents.forEach(content => {
-        content.style.display = 'none';
-    });
-    tabContents[0].style.display = 'block';
-}
-function settings(){
-    tabContents.forEach(content => {
-        content.style.display = 'none';
-    });
-    tabContents[1].style.display = 'block';
-}
 
 function onConnected() {
     document.querySelector('.connect-button').classList.add('hidden');
@@ -43,10 +21,10 @@ function onDisconnected() {
 }
 
 function connect() {
-    console.log('Requesting Bluetooth Device...');
+    console.log('tes5');
     navigator.bluetooth.requestDevice(
         {
-            acceptAllDevices:true
+            acceptAllDevices: true
         })
         .then(device => {
             console.log('> Found ' + device.name);
@@ -55,19 +33,19 @@ function connect() {
             return device.gatt.connect();
         })
         .then(server => {
-            console.log('Getting Service 0xffe5 - Light control...');
-            return server.getPrimaryService(0xffe5);
+            console.log('Getting Service');
+            return server.getPrimaryService('6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
         })
         .then(service => {
-            console.log('Getting Characteristic 0xffe9 - Light control...');
-            return service;
+            //create notification
+            tess = service;
+            return service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
         })
-        .then(service => {
-            console.log('All ready!');
-            notifCharacteristic = service.getCharacteristic('6E400003-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
-            sendCharacteristic = service.getCharacteristic('6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase());
-            notifCharacteristic.addEventListener('characteristicvaluechanged',handleNotif);
-            notifCharacteristic.startNotifications();
+        .then(characteristic => {
+            ledCharacteristic = characteristic;
+            ledCharacteristic.addEventListener('characteristicvaluechanged',handleNotif);
+            ledCharacteristic.startNotifications();
+            enableSend();
             onConnected();
         })
         .catch(error => {
@@ -75,14 +53,22 @@ function connect() {
         });
 }
 
+function enableSend(){
+    return tess.getCharacteristic('6E400002-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase()).then(temp =>
+        {
+            sendmode = temp;
+        }    
+    )
+}
+
 function handleNotif(event) {
     console.log(event.target.value);
-}
+  }
 
 function powerOn() {
     const string = "alarm:on";
     const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
-    return sendCharacteristic.writeValue(uint8Array)
+  return sendmode.writeValue(uint8Array)
       .catch(err => console.log('Error when powering on! ', err))
       .then(() => {
           poweredOn = true;
@@ -93,7 +79,7 @@ function powerOn() {
 function powerOff() {
     const string = "alarm:off";
     const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
-    return sendCharacteristic.writeValue(uint8Array)
+  return sendmode.writeValue(uint8Array)
       .catch(err => console.log('Error when switching off! ', err))
       .then(() => {
           poweredOn = false;
@@ -121,7 +107,7 @@ function setColor(red, green, blue) {
     const uint8Array = Uint8Array.from(string.split("").map((x) => x.charCodeAt()));
 
     //let data = new Uint8Array([0x56, red, green, blue, 0x00, 0xf0, 0xaa]);
-    return sendCharacteristic.writeValue(uint8Array)
+    return sendmode.writeValue(uint8Array)
         .catch(err => console.log('Error when writing value! ', err));
 }
 
