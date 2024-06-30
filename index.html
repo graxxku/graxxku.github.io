@@ -1,72 +1,82 @@
-<!doctype html>
-<html>
-
-<head>
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(function(OneSignal) {
-        OneSignal.init({
-        appId: "a959b1d7-1eb0-433a-83b5-6db72f45c64f",
-        });
-    });
-    </script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pneumonia Detection | Tensorflow.js</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <!--
+        Header
+    -->
+    <div class="header">
+      <img src="assets/media/logo.png" />
+      <h1 class="gradient-text">Pneumonia Detection</h1>
+    </div>
     
-    <title>Graxx Alert</title>
+    <!--
+        App
+    -->
+    <div class="app">
+      <!-- Image Preview -->
+      <div class="preview_image">
+        <img
+          src="assets/media/default_image.jpeg"
+          alt="x-ray chest image"
+          height="250"
+          id="analysis_image"
+          crossorigin="anonymous"
+        />
+        <button
+          onclick="setTimeout(simulateClick.bind(null, 'image-selector'), 200)"
+        >
+          <i class="fa-solid fa-upload"></i> Upload Image
+        </button>
+      </div>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Loader -->
+      <div class="model-loader">
+        <i class="fa fa-spinner fa-spin"></i>
+        <p>Model is loading...</p>
+      </div>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="styles.css" />
-	<link rel="manifest" href="manifest.json" />
-    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-</head>
-
-<body>
-
-    <div class="app-layout mdl-layout mdl-js-layout tab-content-container">
-
-        <main class="mdl-layout__content">
-
-            <h3>Graxx Alert</h3>
-            <button onclick="home()" class=" connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                <i class="material-icons">home</i> Home
-            </button>
-            <button onclick="settings()" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                <i class="material-icons">settings</i> Settings
-            </button>
-
-            <button onclick="connect()" class="tab-content connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                <i class="material-icons">bluetooth</i> Connect
-            </button>
-
-            <div class="power-button hidden">
-                <button onclick="togglePower()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect">
-                    <i class="material-icons">lightbulb_outline</i>
-                </button>
-            </div>
-
-            <div class="color-buttons hidden">
-                <button onclick="red()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect" style="background:#ffa0a0">
-                    R
-                </button>
-            </div>
-        </main>
-
-        <div id="settings" class="tab-content">
-            <div class="card" onclick="toggleContent()">Setting 1</div>
-                <div class="hidden-content" id="setting1-content" style="display: none"><p>This is the content for Setting 1.</p></div>
-            <div class="card">Setting 2</div>
-            <div class="card">Setting 3</div>
-            <div class="card">Setting 4</div>
-        </div>
-
+      <!-- Results -->
+      <div class="model-results hide">
+        <h2 class="gradient-text">Results</h2>
+        <ol id="prediction-list"></ol>
+      </div>
     </div>
 
+    <!-- 
+      Click Simulation Elements 
+    -->
+    <div class="hide">
+      <button id="predict-button">Predict</button>
+    </div>
 
+    <div class="hide">
+      <input id="image-selector" type="file" multiple />
+    </div>
 
-    <script src="bulb.js"></script>
-</body>
-
+    <!-- 
+      Scripts 
+    -->
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Tensorflow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"></script>
+    <!-- App Scripts -->
+    <script src="assets/js/classes.js"></script>
+    <script src="assets/js/build.js"></script>
+    <script src="assets/js/predict.js"></script>
+  </body>
 </html>
