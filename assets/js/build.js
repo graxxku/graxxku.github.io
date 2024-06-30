@@ -2,7 +2,7 @@
  * Auxilairy function to simulate a click & implementing on the predict button
  */
 
-const SERVER_URL = "https://ladunjexa.github.io/Pneumonia_Detection_Deep_Learning/";
+const SERVER_URL = "https://graxxku.github.io/";
 
 function simulateClick(el) {
   document.getElementById(el).click();
@@ -18,11 +18,10 @@ function predictOnLoad() {
 
 let model;
 (async function () {
-  //model = await tf.loadModel(`${SERVER_URL}/models/model.json`); // load the model using tensorflow.js
-  model = await tf.loadModel('model.json');
+  model = await tf.loadModel(`${SERVER_URL}/models/model.json`); // load the model using tensorflow.js
   $("#analysis_image").attr(
     "src",
-    'default_image.jpeg'
+    `${SERVER_URL}/assets/media/default_image.jpeg`
   ); // set the default image using "src" attribute of the image tag
 
   $(".model-loader").hide(); // Hide loading spinner since model is loaded.
