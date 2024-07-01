@@ -78,5 +78,16 @@
     <script src="assets/js/classes.js"></script>
     <script src="assets/js/build.js"></script>
     <script src="assets/js/predict.js"></script>
+
+    <!-- (C) WEB APP MANIFEST -->
+    <!-- https://web.dev/add-manifest/ -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- (D) SERVICE WORKER -->
+    <script>
+    if ("serviceWorker" in navigator) { navigator.serviceWorker.register("sw.js"); }
+    </script>
+
+
   </body>
 </html>
