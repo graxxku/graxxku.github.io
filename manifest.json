@@ -1,9 +1,23 @@
 {
-    "name": "Demo PWA",
-    "short_name": "Demo",
-    "start_url": "index.html",
-    "scope": "/",
-    "background_color": "white",
-    "theme_color": "white",
-    "display": "standalone"
-  }
+  "name": "Graxx Health",
+  "short_name": "GraxxHealth",
+  "start_url": "index.html",
+  "scope": "/",
+  "background_color": "#394cbf",
+  "theme_color": "#54b95f",
+  "display": "standalone",
+  "id": "ghx",
+  "description": "App Companion for Graxx Health IOT",
+  "dir": "auto",
+  "lang": "en",
+  "orientation": "any",
+  "categories": [
+    "health",
+    "sports"
+  ],
+  "display_override": [
+    "fullscreen",
+    "browser",
+    "window-controls-overlay"
+  ]
+}
