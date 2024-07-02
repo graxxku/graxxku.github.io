@@ -2,7 +2,7 @@
 self.addEventListener("install", evt => {
     self.skipWaiting();
     evt.waitUntil(
-      caches.open("Demo")
+      caches.open("serv")
       .then(cache => cache.addAll([
         "/",
         "index.html",
