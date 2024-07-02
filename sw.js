@@ -6,10 +6,14 @@ self.addEventListener("install", evt => {
       .then(cache => cache.addAll([
         "/",
         "index.html",
-        "manifest.json"
-        //"YOUR-STYLES.css",
-        //"YOUR-SCRIPTS.js",
-        //"YOUR-IMAGES.jpg"
+        "manifest.json",
+        "/models/model.json",
+        "/assets/css/style.css",
+        "/assets/js/build.js",
+        "/assets/js/classes.js",
+        "/assets/js/predict.js",
+        "/assets/media/default_image.jpeg",
+        "/assets/media/logo.png",
       ]))
       .catch(err => console.error(err))
     );
