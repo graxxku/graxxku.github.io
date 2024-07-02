@@ -14,6 +14,8 @@ self.addEventListener("install", evt => {
         "/assets/js/predict.js",
         "/assets/media/default_image.jpeg",
         "/assets/media/logo.png",
+        "/lib/mannequin.js",
+        "/lib/three.min.js"
       ]))
       .catch(err => console.error(err))
     );
