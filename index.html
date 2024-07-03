@@ -12,50 +12,46 @@
     <link rel="manifest" href="/manifest.json">
   </head>
   <body>
+
+    <div class="app-layout mdl-layout mdl-js-layout tab-content-container">
+
+      <main class="mdl-layout__content">
+
+        <h3>Graxx Health</h3>
+        <button onclick="home()" class=" connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Home</button>
+        <button onclick="settings()" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Settings</button>
+        <button onclick="connect()" class="tab-content connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Connect</button>
+  
+        <div class="power-button hidden">
+            <button onclick="togglePower()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect">
+                <i class="material-icons">lightbulb_outline</i>
+            </button>
+        </div>
+  
+        <div class="color-buttons hidden">
+            <button onclick="red()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect" style="background:#ffa0a0">
+                R
+            </button>
+        </div>
+      </main>
+  
+      <div id="settings" class="tab-content">
+        <div class="card" onclick="toggleContent()">Setting 1</div>
+            <div class="hidden-content" id="setting1-content" style="display: none"><p>This is the content for Setting 1.</p></div>
+        <div class="card">Setting 2</div>
+        <div class="card">Setting 3</div>
+        <div class="card">Setting 4</div>
+      </div>
+
+      <div id="canvas"></div>
+
+    </div>
+
     
-    <!--
-        App
-    -->
-    <div class="app">
-      <!-- Image Preview -->
-      <div class="preview_image">
-        <img
-          src="assets/media/default_image.jpeg"
-          alt="x-ray chest image"
-          height="250"
-          id="analysis_image"
-          crossorigin="anonymous"
-        />
-        <button
-          onclick="setTimeout(simulateClick.bind(null, 'image-selector'), 200)"
-        >
-          <i class="fa-solid fa-upload"></i> Upload Image
-        </button>
-      </div>
 
-      <!-- Loader -->
-      <div class="model-loader">
-        <i class="fa fa-spinner fa-spin"></i>
-        <p>Model is loading...</p>
-      </div>
-
-      <!-- Results -->
-      <div class="model-results hide">
-        <h2 class="gradient-text">Results</h2>
-        <ol id="prediction-list"></ol>
-      </div>
-    </div>
-
-    <!-- 
-      Click Simulation Elements 
-    -->
-    <div class="hide">
-      <button id="predict-button">Predict</button>
-    </div>
-
-    <div class="hide">
-      <input id="image-selector" type="file" multiple />
-    </div>
+    
+    
+    
 
     <!-- 
       Scripts 
@@ -71,90 +67,53 @@
 
     <script src="lib/three.min.js"></script>
     <script src="lib/mannequin.js"></script>
+    
+
     <script>
-		
-			createScene();
+  
+      createScene();
+      man = new Male();
 
-			man0 = new Male();
-			man1 = new Male();
-			man = new Male();
+      // stick
+      geometry = new THREE.CylinderGeometry(0.4, 0.4, 80);
+      material = new THREE.MeshPhongMaterial({color: 'crimson'});
+      stick = new THREE.Mesh(geometry, material);
+      stick.rotation.x = rad(90);
+      stick.position.set(-1, 0.25, 0);
+      stick.castShadow = true;
 
-			// stick
-			geometry = new THREE.CylinderGeometry(0.4, 0.4, 80);
-			material = new THREE.MeshPhongMaterial({color: 'crimson'});
-			stick = new THREE.Mesh(geometry, material);
-			stick.rotation.x = rad(90);
-			stick.position.set(-1, 0.25, 0);
-			stick.castShadow = true;
-			// another stick
-			stick01 = stick.clone();
-			stick01.material = material.clone();
+      man.r_fingers.attach(stick);
 
-			man.r_fingers.attach(stick);
-			man0.r_fingers.attach(stick01);
-			man1.r_fingers.attach(stick01.clone());
+      // posture from example-posture.html
+      A = {"version":7,"data":[[0,-7.2,0],[90,-85,74.8],[16.1,-29.5,26.3],[3.5,-34.8,6.1],[14.1,-2.9,-19.8],[30],[-6,-6,-42.6],[14.6,-46.9,98.9],[90],[4.9,9,-15.4],[68.9,-34.7,-2.1],[155],[-20,0,0],[-90,70,85,0,-5,0,-5],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[-77,4.9,-1.1],[55],[-5,-60,-20],[148.7,-4.4,127.3,0,50,0,35],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70]]};
 
-//			man0.position.x = -30;
-//			man0.rotation.y = 2;
+      // posture from example-posture-standing.html
+      B = {"version":7,"data":[[0,2.8,0],[0,-90,0],[0,0,-2],[0,0,5],[16,0,0],[0],[-16.1,-5.8,-1.7],[-16,0,0],[0],[16.1,5.8,-1.7],[15.1,-11.3,-12],[30],[5,0,0],[-90,70,100,0,10,0,10],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[-28.4,8.1,-18.3],[70],[-5,28,37.4],[148.7,-4.4,127.3,0,50,0,35],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70]]};
 
-//			man1.position.x = +30;
+      function animate(t)
+      {
+      
+        var k = THREE.MathUtils.clamp(0.5 + 0.6 * sin(t), 0, 1);
 
-			// posture from example-posture.html
-			A = {"version":7,"data":[[0,-7.2,0],[90,-85,74.8],[16.1,-29.5,26.3],[3.5,-34.8,6.1],[14.1,-2.9,-19.8],[30],[-6,-6,-42.6],[14.6,-46.9,98.9],[90],[4.9,9,-15.4],[68.9,-34.7,-2.1],[155],[-20,0,0],[-90,70,85,0,-5,0,-5],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[-77,4.9,-1.1],[55],[-5,-60,-20],[148.7,-4.4,127.3,0,50,0,35],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70]]};
+        man.posture = Mannequin.blend(A, B, k);
+        man.position.x = THREE.MathUtils.mapLinear(k, 0, 1, -30, 30);
+        man.rotation.y = THREE.MathUtils.mapLinear(k, 0, 1, 2, 0);
 
-			// posture from example-posture-standing.html
-			B = {"version":7,"data":[[0,2.8,0],[0,-90,0],[0,0,-2],[0,0,5],[16,0,0],[0],[-16.1,-5.8,-1.7],[-16,0,0],[0],[16.1,5.8,-1.7],[15.1,-11.3,-12],[30],[5,0,0],[-90,70,100,0,10,0,10],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[-28.4,8.1,-18.3],[70],[-5,28,37.4],[148.7,-4.4,127.3,0,50,0,35],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70]]};
+        var bottom = Math.min(
+          man.l_ankle.point(6, 2, 0).y,
+          man.l_ankle.point(-2, 2.5, 0).y,
+          man.l_ankle.point(2, 2.5, 2).y,
+          man.l_ankle.point(2, 2.5, -2).y
+        );
+        man.position.y += (-29.5 - bottom);
 
-			man0.posture = A;
-			man0.position.x = -30;
-			man0.position.y = -0.455;
-			man0.rotation.y = 2;
-			
-			man1.posture = B;
-			man1.position.x = 30;
-
-			man0.traverse(function (o)
-			{
-				if (o.material)
-				{
-					o.material.transparent = true;
-					o.material.opacity = 0.3;
-					o.material.depthWrite = false;
-				}
-			});
-
-			man1.traverse(function (o)
-			{
-				if (o.material)
-				{
-					o.material.transparent = true;
-					o.material.opacity = 0.3;
-					o.material.depthWrite = false;
-				}
-			});
-
-			function animate(t)
-			{
-			
-				var k = THREE.MathUtils.clamp(0.5 + 0.6 * sin(t), 0, 1);
-
-				man.posture = Mannequin.blend(A, B, k);
-				man.position.x = THREE.MathUtils.mapLinear(k, 0, 1, -30, 30);
-				man.rotation.y = THREE.MathUtils.mapLinear(k, 0, 1, 2, 0);
-
-				var bottom = Math.min(
-					man.l_ankle.point(6, 2, 0).y,
-					man.l_ankle.point(-2, 2.5, 0).y,
-					man.l_ankle.point(2, 2.5, 2).y,
-					man.l_ankle.point(2, 2.5, -2).y
-				);
-				man.position.y += (-29.5 - bottom);
-
-				scene.rotation.y = sin(t / 10);
-			}
-			
-	</script>
-
+        scene.rotation.y = sin(t / 10);
+      }
+      
+    </script>
+  
+  <!-- ble -->
+  <script src="lib/ble.js"></script>
     
 
   <!-- (D) SERVICE WORKER -->
