@@ -12,38 +12,31 @@
     <link rel="manifest" href="/manifest.json">
   </head>
   <body>
+    
 
     <div class="app-layout mdl-layout mdl-js-layout tab-content-container">
+      
 
       <main class="mdl-layout__content">
 
+        
+
         <h3>Graxx Health</h3>
+        <div id="canvas">animation</div>
+        
         <button onclick="home()" class=" connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Home</button>
         <button onclick="settings()" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Settings</button>
         <button onclick="connect()" class="tab-content connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Connect</button>
-  
-        <div class="power-button hidden">
-            <button onclick="togglePower()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect">
-                <i class="material-icons">lightbulb_outline</i>
-            </button>
-        </div>
-  
-        <div class="color-buttons hidden">
-            <button onclick="red()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect" style="background:#ffa0a0">
-                R
-            </button>
-        </div>
+        
       </main>
   
       <div id="settings" class="tab-content">
         <div class="card" onclick="toggleContent()">Setting 1</div>
             <div class="hidden-content" id="setting1-content" style="display: none"><p>This is the content for Setting 1.</p></div>
         <div class="card">Setting 2</div>
-        <div class="card">Setting 3</div>
-        <div class="card">Setting 4</div>
       </div>
 
-      <div id="canvas"></div>
+      
 
     </div>
 
