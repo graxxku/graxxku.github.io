@@ -1,4 +1,4 @@
-const ref = 1;
+const ref = 2;
 
 // (A) CREATE/INSTALL CACHE
 self.addEventListener("install", evt => {
