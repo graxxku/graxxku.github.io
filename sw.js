@@ -1,3 +1,5 @@
+const ref = 1;
+
 // (A) CREATE/INSTALL CACHE
 self.addEventListener("install", evt => {
     self.skipWaiting();
