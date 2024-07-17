@@ -23,11 +23,17 @@
 
         <h3>Graxx Sport</h3>
         
-        
+        <div id="canvas"></div>
+
         <button onclick="home()" class=" connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Home</button>
         <button onclick="settings()" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Settings</button>
         <button onclick="connect()" class="tab-content connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Connect</button>
-        <div id="canvas">animation</div>
+        <div class="power-button hidden">
+          <button onclick="togglePower()" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect">
+              <i class="material-icons">lightbulb_outline</i>
+          </button>
+        </div>
+        
       </main>
   
       <div id="settings" class="tab-content">
