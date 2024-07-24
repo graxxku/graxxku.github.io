@@ -21,11 +21,13 @@
 
         <h3>Graxx Sport</h3>
 
-
-        
-
-        
-        <div id="canvas" class="tab-content"></div>
+        <img
+          src="assets/media/default_image.jpeg"
+          height="100"
+          id="analysis_image"
+        />
+        <button onclick="predict()">Prediction</button>
+        <div id="canvas"></div>
 
         <button onclick="home()">Home</button>
         <button onclick="settings()">Settings</button>
@@ -34,14 +36,6 @@
         <div class="power-button hidden">
           <button onclick="togglePower()">Pull Data</button>
         </div>
-
-        <img
-          src="assets/media/default_image.jpeg"
-          height="100"
-          id="analysis_image"
-        />
-        <button onclick="predict()">Prediction</button>
-        
       </main>
 
       <div class="tab-content">
