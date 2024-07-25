@@ -9,7 +9,7 @@ CLASSES = {
 
   let model;
   (async function () {
-    model = await tf.loadModel(`${SERVER_URL}/experiment/model.json`); // load the model using tensorflow.js
+    model = await tf.loadModel(`${SERVER_URL}/experiment/model.json`,false); // load the model using tensorflow.js
   })();
 
 
