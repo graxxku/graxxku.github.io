@@ -20,34 +20,26 @@
       <main class="mdl-layout__content">
 
         <h3>Graxx Sport</h3>
-
-        <img
-          src="assets/media/default_image.jpeg"
-          height="100"
-          id="analysis_image"
-        />
-        <button onclick="predict()">Prediction</button>
-
         
-        <div id="canvas" class="tab-content"></div>
+        <div id="canvas" class=""></div>
 
-        <button onclick="home()">Home</button>
-        <button onclick="settings()">Settings</button>
-        <button onclick="connect1()" class="tab-content">Connect1</button>
-        <button onclick="connect2()" class="tab-content">Connect2</button>
+        <!-- <button onclick="home()">Home</button>
+        <button onclick="settings()">Settings</button> -->
+        <button onclick="connect1()" class="">Connect1</button>
+        <button onclick="connect2()" class="">Connect2</button>
         <div class="power-button hidden">
-          <button onclick="togglePower()">Pull Data</button>
+          <button onclick="pullData()">Pull Data</button>
         </div>
 
-        
+        <button onclick="predict()">Prediction</button>
 
       </main>
 
-      <div class="tab-content">
+      <!-- <div class="tab-content">
         <div class="card" onclick="toggleContent()">Setting 1</div>
             <div class="hidden-content" id="setting1-content" style="display: none"><p>This is the content for Setting 1.</p></div>
         <div class="card">Setting 2</div>
-      </div>
+      </div> -->
     </div>
 
     
@@ -59,16 +51,15 @@
     <script src="lib/three.min.js"></script>
     <script src="lib/mannequin.js"></script>
     <script src="lib/ble.js"></script>
-    <!-- <script src="lib/ai.js"></script> -->
-    <script src="experiment/exp.js"></script>
+    <script src="lib/ai.js"></script>
     
 
     <!-- animation -->
     <script>
       createScene();
       man = new Male();
-      A = {"version":7,"data":[[0,-7.2,0],[90,-85,74.8],[16.1,-29.5,26.3],[3.5,-34.8,6.1],[14.1,-2.9,-19.8],[30],[-6,-6,-42.6],[14.6,-46.9,98.9],[90],[4.9,9,-15.4],[68.9,-34.7,-2.1],[155],[-20,0,0],[-90,70,85,0,-5,0,-5],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[0,0,-10,0,-10,0,-10],[-77,4.9,-1.1],[55],[-5,-60,-20],[148.7,-4.4,127.3,0,50,0,35],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70]]};
-      B = {"version":7,"data":[[0,2.8,0],[0,-90,0],[0,0,-2],[0,0,5],[16,0,0],[0],[-16.1,-5.8,-1.7],[-16,0,0],[0],[16.1,5.8,-1.7],[15.1,-11.3,-12],[30],[5,0,0],[-90,70,100,0,10,0,10],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[0,0,20,0,20,0,20],[-28.4,8.1,-18.3],[70],[-5,28,37.4],[148.7,-4.4,127.3,0,50,0,35],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70],[0,0,70,0,70,0,70]]};
+      A = {"version":7,"data":[[0,3.8,0],[-172.8,-48.7,-174.7],[-72.9,-55.7,-80.6],[1.5,29.6,-11.7],[9.2,0.4,16.4],[31],[-5.3,-6.2,-16.7],[-3.7,-1.2,10.4],[28.3],[14.3,4.2,-16.9],[2.4,-46.6,104.5],[4.1],[5,15.2,0],[-90,70,75,0,10,0,10],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10],[-13.4,-25.1,61.3],[72.3],[-5,19.4,10.9],[90,-70,75,0,10,0,10],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10]]}
+      B = {"version":7,"data":[[0,3.8,0],[-7.4,-88.1,-13.4],[34.5,14.8,-2.1],[-5.1,-31.5,-18.6],[5.4,-43.2,2.6],[0],[7.1,-5.8,-1],[-14.7,-0.2,8.8],[42.1],[19.6,3.4,33.1],[-5.7,-27.7,60],[9.4],[5,15.2,0],[-90,70,75,0,10,0,10],[0,0,10,0,10,0,10],[11.4,2,9.8,0,10,0,10],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10],[-20.1,3.5,69.3],[0],[-8.7,9.7,-2.2],[90,-70,75,0,10,0,10],[0,0,10,0,10,0,10],[0,0,13,0,0.1,0,0.1],[0,0,10,0,10,0,10],[0,0,10,0,10,0,10]]}
       function animate(t)
       {
         var k = THREE.MathUtils.clamp(0.5 + 0.6 * sin(t), 0, 1);
