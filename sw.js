@@ -10,18 +10,13 @@ self.addEventListener("install", evt => {
         "index.html",
         "manifest.json",
         "/models/model.json",
-        "/models/group1-shard1of4",
-        "/models/group1-shard2of4",
-        "/models/group1-shard3of4",
-        "/models/group1-shard4of4",
+        "/models/group1-shard1of1.bin",
         "/assets/css/style.css",
-        "/assets/js/build.js",
-        "/assets/js/classes.js",
-        "/assets/js/predict.js",
         "/assets/media/default_image.jpeg",
-        "/assets/media/logo.png",
         "/lib/mannequin.js",
-        "/lib/three.min.js"
+        "/lib/three.min.js",
+        "/lib/ai.js",
+        "/lib/ble.js"
       ]))
       .catch(err => console.error(err))
     );
