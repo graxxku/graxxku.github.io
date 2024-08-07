@@ -1,3 +1,6 @@
+<!-- ini core nya, pilih sportnya, ada record button, ada analyze button -->
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,11 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graxx Sport</title>
-    <link rel="stylesheet" href="assets/dashboard.css" />
-
-    <!-- (C) WEB APP MANIFEST -->
-    <!-- https://web.dev/add-manifest/ -->
-    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="css/style.css" />
     <script defer src="/lib/auth.js"></script>
     <script defer src="/init.js"></script>
   </head>
@@ -17,31 +16,20 @@
     
 
     <div class="app-layout tab-content-container">
-      
-
       <main class="mdl-layout__content">
 
         <h3>Graxx Sport</h3>
         
         <div id="canvas" class=""></div>
 
-        <!-- <button onclick="home()">Home</button>
-        <button onclick="settings()">Settings</button> -->
-        <!-- <button onclick="connect1()" class="">Connect1</button> -->
-        <button onclick="connect2()" class="">Connect2</button>
-        <div class="power-button hidden">
-          <button onclick="pullData()">Pull Data</button>
-        </div>
+        <button onclick="location.href='/pages/home.html';">Home</button>
+        <button onclick="location.href='/pages/train.html';">Training</button>
 
+
+        <button onclick="pullData()">Pull Data</button>
         <button onclick="predict()">Prediction</button>
 
       </main>
-
-      <!-- <div class="tab-content">
-        <div class="card" onclick="toggleContent()">Setting 1</div>
-            <div class="hidden-content" id="setting1-content" style="display: none"><p>This is the content for Setting 1.</p></div>
-        <div class="card">Setting 2</div>
-      </div> -->
       <p class="text-center"><a href="#" class="logout">Log Out</a></p>
     </div>
 
@@ -69,10 +57,7 @@
       }
     </script>
 
-  <!-- SERVICE WORKER -->
-  <script>
-    if ("serviceWorker" in navigator) { navigator.serviceWorker.register("sw.js") }
-  </script>
+  
 
 
   </body>
