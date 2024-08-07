@@ -1,76 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Graxx Sport</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-
-    <!-- (C) WEB APP MANIFEST -->
-    <!-- https://web.dev/add-manifest/ -->
-    <link rel="manifest" href="/manifest.json">
-  </head>
-  <body>
-    
-
-    <div class="app-layout tab-content-container">
-      
-
-      <main class="mdl-layout__content">
-
-        <h3>Graxx Sport</h3>
-        
-        <div id="canvas" class=""></div>
-
-        <!-- <button onclick="home()">Home</button>
-        <button onclick="settings()">Settings</button> -->
-        <!-- <button onclick="connect1()" class="">Connect1</button> -->
-        <button onclick="connect2()" class="">Connect2</button>
-        <div class="power-button hidden">
-          <button onclick="pullData()">Pull Data</button>
-        </div>
-
-        <button onclick="predict()">Prediction</button>
-
-      </main>
-
-      <!-- <div class="tab-content">
-        <div class="card" onclick="toggleContent()">Setting 1</div>
-            <div class="hidden-content" id="setting1-content" style="display: none"><p>This is the content for Setting 1.</p></div>
-        <div class="card">Setting 2</div>
-      </div> -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+    <script defer src="/js/login.js"></script>
+</head>
+<body class="login">
+    <div class="container">
+        <h2 class="text-center">Login</h2>
+        <br>
+        <form action="/dashboard.html" class="loginForm">
+            <div class="input-group">
+                <label for="username" class="label">Username</label>
+                <input type="text" id="username" class="input">
+                <span class="error-message"></span>
+            </div>
+            <br>
+            <div class="input-group">
+                <label for="password" class="label">Password</label>
+                <input type="password" id="password" class="input">
+                <span class="error-message"></span>
+            </div>
+            <br>
+            <button class="button" type="submit">Login</button>
+        </form>
     </div>
-
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Tensorflow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"></script>
-    <!-- App Scripts -->
-    <script src="lib/three.min.js"></script>
-    <script src="lib/mannequin.js"></script>
-    <script src="lib/ble.js"></script>
-    <script src="lib/ai.js"></script>
-    <script src="param.js"></script>
-    
-
-    <!-- animation -->
-    <script>
-      createScene();
-      man = new Male();
-      function animate(t)
-      {
-        var k = THREE.MathUtils.clamp(0.5 + 0.6 * sin(t*speed), 0, 1);
-        man.posture = Mannequin.blend(A, B, k);
-      }
-    </script>
-
-  <!-- SERVICE WORKER -->
-  <script>
-    if ("serviceWorker" in navigator) { navigator.serviceWorker.register("sw.js") }
-  </script>
-
-
-  </body>
+</body>
 </html>
