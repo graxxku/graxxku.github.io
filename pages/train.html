@@ -12,7 +12,10 @@
     <script defer src="/lib/auth.js"></script>
     <script defer src="/init.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/lib/main.js"></script>
+    <script src="/lib/three.min.js"></script>
+    <script src="/lib/mannequin.js"></script>
+    <script src="/lib/ml.js"></script>
+    <script src="/param.js"></script>
   </head>
   <body>
     
@@ -20,7 +23,7 @@
     <div class="app-layout tab-content-container">
       <main class="mdl-layout__content">
 
-        <h3>Connect and Record</h3>
+        <h3>Training</h3>
         
         <div id="canvas" class=""></div>
 
@@ -29,12 +32,25 @@
         <button onclick="location.href='/pages/profile.html';">Profile</button>
 
 
-        <button onclick="connect()" class="">Connect</button>
-        <button onclick="recordData()">Record Training</button>
+        <button onclick="predict()">Prediction</button>
         <button class="logout">Logout</button>
 
       </main>
     </div>
+    
+
+    <!-- animation -->
+    <script>
+      createScene();
+      man = new Male();
+      function animate(t)
+      {
+        var k = THREE.MathUtils.clamp(0.5 + 0.6 * sin(t*speed), 0, 1);
+        man.posture = Mannequin.blend(A, B, k);
+      }
+    </script>
+
+  
 
 
   </body>
