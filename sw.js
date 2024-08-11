@@ -8,15 +8,19 @@ self.addEventListener("install", evt => {
       .then(cache => cache.addAll([
         "/",
         "index.html",
+        "init.js",
+        "param.js",
+        "favicon.ico",
         "manifest.json",
-        "/models/model.json",
-        "/models/group1-shard1of1.bin",
-        "/assets/css/style.css",
-        "/assets/media/default_image.jpeg",
+        "/pages/home.html",
+        "/pages/train.html",
+        "/pages/profile.html",
         "/lib/mannequin.js",
         "/lib/three.min.js",
-        "/lib/ai.js",
-        "/lib/ble.js"
+        "/lib/ml.js",
+        "/lib/main.js",
+        "/lib/auth.js",
+        "/lib/login.js",
       ]))
       .catch(err => console.error(err))
     );
