@@ -11,15 +11,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/lib/main.js"></script>
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
           appId: "896d776a-cd23-472c-95d7-e10488cfdcd9",
-          safari_web_id: "web.onesignal.auto.0654afc0-ce06-4b31-9757-37165e976417",
-          notifyButton: {
-            enable: true,
-          },
         });
       });
     </script>
@@ -30,7 +27,6 @@
       <button onclick="toggleBle()" class="toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
       <button onclick="alarm()" class="toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Alarm</button>
       <button onclick="wifi()" class="bg-green-500 text-white px-4 py-2 rounded">WIFI</button>
-      <button onclick="schedule()" class="bg-green-500 text-white px-4 py-2 rounded">Schedule</button>
 
       <!-- scheduler -->
       <button id="scheduleButton">Schedule Alarm</button>
