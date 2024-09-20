@@ -62,6 +62,7 @@
     <script>
       createScene();
       man = new Male();
+      man.rotation.y = 20;
       function animate(t)
       {
         var k = THREE.MathUtils.clamp(0.5 + 0.6 * sin(t*speed), 0, 1);
