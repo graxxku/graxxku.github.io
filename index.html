@@ -50,6 +50,12 @@
       </div>
 
     </div>
-    
+
+    <script>
+      waitForElementToExist('onesignal-bell-container').then(element => {
+        document.getElementById('onesignal-bell-container').style.display = 'none';
+      });
+    </script>
+
   </body>
 </html>
