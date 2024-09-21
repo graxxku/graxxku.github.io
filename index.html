@@ -96,8 +96,7 @@
           });
       }
       waitForElementToExist('onesignal-bell-container').then(element => {
-        const bellcontainer = document.getElementById('onesignal-bell-container');
-        bellcontainer.classList.add('hidden');
+        document.getElementById('onesignal-bell-container').style.display = 'none';
       });
     </script>
 
