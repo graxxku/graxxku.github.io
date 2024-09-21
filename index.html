@@ -11,7 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/lib/main.js"></script>
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(async function(OneSignal) {
@@ -24,12 +23,11 @@
   <body>
     
     <div class="flex flex-col items-center justify-center h-screen">
-      <button onclick="toggleBle()" class="toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
-      <button onclick="alarm()" class="toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Alarm</button>
-      <button onclick="wifi()" class="bg-green-500 text-white px-4 py-2 rounded">WIFI</button>
+      <button onclick="toggleBle()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
+      <button onclick="alarm()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Alarm</button>
+      <button onclick="wifi()" class="w-1/4 bg-green-500 text-white px-4 py-2 rounded">WIFI</button>
+      <button id="scheduleButton" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
 
-      <!-- scheduler -->
-      <button id="scheduleButton">Schedule Alarm</button>
       <div id="scheduleForm" style="display:none;">
           <form id="alarmForm">
               <label>Select Days:</label><br>
