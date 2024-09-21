@@ -1,52 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-
-    <!-- WEB APP MANIFEST -->
-    <link rel="manifest" href="/manifest.json">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graxx Sport</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="/lib/login.js"></script>
-</head>
-<body>
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-        </div>
-      
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6 loginForm" action="/pages/home.html">
-            <div>
-              <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
-              <div class="mt-2">
-                <input id="username" name="username" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-              </div>
-            </div>
-      
-            <div>
-              <div class="flex items-center justify-between">
-                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-              </div>
-              <div class="mt-2">
-                <input id="password" name="password" type="password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-              </div>
-            </div>
-      
-            <div>
-              <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-            </div>
-          </form>
-        </div>
-    </div>
-
-    <!-- SERVICE WORKER -->
+    <script defer src="/lib/auth.js"></script>
+    <script defer src="/init.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/lib/main.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
-        if ("serviceWorker" in navigator) { navigator.serviceWorker.register("sw.js") }
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "896d776a-cd23-472c-95d7-e10488cfdcd9",
+        });
+      });
+    </script>
+  </head>
+  <body>
+    
+    <div class="flex flex-col items-center justify-center h-screen">
+      <button onclick="toggleBle()" class="toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
+      <button onclick="alarm()" class="toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Alarm</button>
+      <button onclick="wifi()" class="bg-green-500 text-white px-4 py-2 rounded">WIFI</button>
+
+      <!-- scheduler -->
+      <button id="scheduleButton">Schedule Alarm</button>
+      <div id="scheduleForm" style="display:none;">
+          <form id="alarmForm">
+              <label>Select Days:</label><br>
+              <input type="checkbox" name="days" value="Monday"> Monday<br>
+              <input type="checkbox" name="days" value="Tuesday"> Tuesday<br>
+              <input type="checkbox" name="days" value="Wednesday"> Wednesday<br>
+              <input type="checkbox" name="days" value="Thursday"> Thursday<br>
+              <input type="checkbox" name="days" value="Friday"> Friday<br>
+              <input type="checkbox" name="days" value="Saturday"> Saturday<br>
+              <input type="checkbox" name="days" value="Sunday"> Sunday<br><br>
+
+              <label for="time_on">Select Time On:</label>
+              <input type="time" id="time_on" name="time_on"><br><br>
+
+              <label for="time_off">Select Time Off:</label>
+              <input type="time" id="time_off" name="time_off"><br><br>
+
+              <button type="submit">Set Alarm</button>
+          </form>
+      </div>
+
+    </div>
+  
+
+    <script>
+      document.getElementById('scheduleButton').addEventListener('click', function() {
+          document.getElementById('scheduleForm').style.display = 'block';
+      });
+
+      document.getElementById('alarmForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const days = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(el => el.value);
+          const timeOn = document.getElementById('time_on').value;
+          const timeOff = document.getElementById('time_off').value;
+          const output = {
+              days_chosen: days,
+              time_on_to_off: {
+                  time_on: timeOn,
+                  time_off: timeOff
+              }
+          };
+          console.log(JSON.stringify(output));
+      });
     </script>
 
-</body>
+
+  </body>
 </html>

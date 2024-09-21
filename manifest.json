@@ -1,19 +1,19 @@
 {
-  "name": "Graxx Sport",
-  "short_name": "GraxxSport",
+  "name": "Graxx Alert",
+  "short_name": "GraxxAlert",
   "start_url": "index.html",
   "scope": "/",
   "background_color": "#394cbf",
   "theme_color": "#54b95f",
   "display": "standalone",
   "id": "ghs",
-  "description": "App Companion for Graxx Sport IOT",
+  "description": "App Companion for Graxx Alert Security System",
   "dir": "auto",
   "lang": "en",
   "orientation": "any",
   "categories": [
-    "health",
-    "sports"
+    "home",
+    "security"
   ],
   "display_override": [
     "fullscreen",
