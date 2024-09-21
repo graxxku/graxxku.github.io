@@ -28,7 +28,7 @@
 
       <!-- wifi -->
       <button onclick="wifi()" class="w-1/4 bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect WIFI</button>
-      <div id="wifiForm" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm" style="display:none;">
+      <div id="wifiForm" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
         <h2 class="text-2xl font-bold mb-6 text-center">Connect to WiFi</h2>
         <form>
             <div class="mb-4">
@@ -47,24 +47,32 @@
         
       <!-- schedule -->
       <button onclick="schedule()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
-      <div id="scheduleForm" style="display:none;">
+      <div id="scheduleForm" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-sm"></div>
+          <h2 class="text-2xl font-bold mb-6 text-center">Set Alarm Schedule</h2>
           <form id="alarmForm" onsubmit="handleAlarmFormSubmit(event)">
-              <label>Select Days:</label><br>
-              <input type="checkbox" name="days" value="Monday"> Monday<br>
-              <input type="checkbox" name="days" value="Tuesday"> Tuesday<br>
-              <input type="checkbox" name="days" value="Wednesday"> Wednesday<br>
-              <input type="checkbox" name="days" value="Thursday"> Thursday<br>
-              <input type="checkbox" name="days" value="Friday"> Friday<br>
-              <input type="checkbox" name="days" value="Saturday"> Saturday<br>
-              <input type="checkbox" name="days" value="Sunday"> Sunday<br><br>
-
-              <label for="time_on">Select Time On:</label>
-              <input type="time" id="time_on" name="time_on"><br><br>
-
-              <label for="time_off">Select Time Off:</label>
-              <input type="time" id="time_off" name="time_off"><br><br>
-
-              <button type="submit" class="toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Set Alarm</button>
+              <div class="mb-4">
+                  <label class="block text-gray-700 font-bold mb-2">Select Days:</label>
+                  <div class="flex flex-wrap">
+                      <label class="mr-4 mb-2"><input type="checkbox" name="days" value="Monday" class="mr-2"> Monday</label>
+                      <label class="mr-4 mb-2"><input type="checkbox" name="days" value="Tuesday" class="mr-2"> Tuesday</label>
+                      <label class="mr-4 mb-2"><input type="checkbox" name="days" value="Wednesday" class="mr-2"> Wednesday</label>
+                      <label class="mr-4 mb-2"><input type="checkbox" name="days" value="Thursday" class="mr-2"> Thursday</label>
+                      <label class="mr-4 mb-2"><input type="checkbox" name="days" value="Friday" class="mr-2"> Friday</label>
+                      <label class="mr-4 mb-2"><input type="checkbox" name="days" value="Saturday" class="mr-2"> Saturday</label>
+                      <label class="mr-4 mb-2"><input type="checkbox" name="days" value="Sunday" class="mr-2"> Sunday</label>
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label for="time_on" class="block text-gray-700 font-bold mb-2">Select Time On:</label>
+                  <input type="time" id="time_on" name="time_on" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              </div>
+              <div class="mb-4">
+                  <label for="time_off" class="block text-gray-700 font-bold mb-2">Select Time Off:</label>
+                  <input type="time" id="time_off" name="time_off" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              </div>
+              <div class="flex items-center justify-between">
+                  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Set Alarm</button>
+              </div>
           </form>
       </div>
 
