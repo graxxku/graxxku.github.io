@@ -96,7 +96,7 @@
           });
       }
       waitForElementToExist('onesignal-bell-container').then(element => {
-        document.getElementById('onesignal-bell-container').style.display = 'none';
+        element.classList.add('hidden')
       });
     </script>
 
