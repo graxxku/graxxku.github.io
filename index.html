@@ -57,6 +57,8 @@
           document.getElementById('scheduleForm').style.display = 'block';
       });
 
+      document.getElementById('onesignal-bell-container').style.display = 'none';
+      
       document.getElementById('alarmForm').addEventListener('submit', function(event) {
           event.preventDefault();
           const days = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(el => el.value);
