@@ -24,12 +24,12 @@
     
     <div class="flex flex-col items-center justify-center h-screen">
       <button onclick="toggleBle()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
-      <button onclick="alarm()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Alarm</button>
-      <button onclick="wifi()" class="w-1/4 bg-green-500 text-white px-4 py-2 rounded">WIFI</button>
-      <button id="scheduleButton" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
+      <button onclick="alarm()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Toggle Alarm</button>
+      <button onclick="wifi()" class="w-1/4 bg-green-500 text-white px-4 py-2 rounded mb-4">Connect WIFI</button>
+      <button onclick="schedule()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
 
       <div id="scheduleForm" style="display:none;">
-          <form id="alarmForm">
+          <form id="alarmForm" onsubmit="handleAlarmFormSubmit(event)">
               <label>Select Days:</label><br>
               <input type="checkbox" name="days" value="Monday"> Monday<br>
               <input type="checkbox" name="days" value="Tuesday"> Tuesday<br>
@@ -50,52 +50,6 @@
       </div>
 
     </div>
-  
-
-    <script>
-      document.getElementById('scheduleButton').addEventListener('click', function() {
-          document.getElementById('scheduleForm').style.display = 'block';
-      });
-
-      function waitForElementToExist(id) {
-          return new Promise(resolve => {
-              if (document.getElementById(id)) {
-                  return resolve(document.getElementById(id));
-              }
-
-              const observer = new MutationObserver(() => {
-                  if (document.getElementById(id)) {
-                      resolve(document.getElementById(id));
-                      observer.disconnect();
-                  }
-              });
-
-              observer.observe(document.body, { childList: true, subtree: true });
-          });
-      }
-
-      // Usage
-      waitForElementToExist('onesignal-bell-container').then(element => {
-        document.getElementById('onesignal-bell-container').style.display = 'none';
-      });
-
-      
-      document.getElementById('alarmForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          const days = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(el => el.value);
-          const timeOn = document.getElementById('time_on').value;
-          const timeOff = document.getElementById('time_off').value;
-          const output = {
-              days_chosen: days,
-              time_on_to_off: {
-                  time_on: timeOn,
-                  time_off: timeOff
-              }
-          };
-          console.log(JSON.stringify(output));
-      });
-    </script>
-
-
+    
   </body>
 </html>
