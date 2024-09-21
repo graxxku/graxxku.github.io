@@ -25,9 +25,9 @@
     <div class="flex flex-col items-center justify-center h-screen">
       <button onclick="toggleBle()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
       <button onclick="alarm()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Toggle Alarm</button>
-      <button onclick="wifi()" class="w-1/4 bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect WIFI</button>
-      <button onclick="schedule()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
 
+      <!-- wifi -->
+      <button onclick="wifi()" class="w-1/4 bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect WIFI</button>
       <div id="wifiForm" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm" style="display:none;">
         <h2 class="text-2xl font-bold mb-6 text-center">Connect to WiFi</h2>
         <form>
@@ -44,9 +44,9 @@
             </div>
         </form>
       </div>
-         
-
-
+        
+      <!-- schedule -->
+      <button onclick="schedule()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
       <div id="scheduleForm" style="display:none;">
           <form id="alarmForm" onsubmit="handleAlarmFormSubmit(event)">
               <label>Select Days:</label><br>
