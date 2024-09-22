@@ -9,13 +9,13 @@ let alarmstatus = false;
 
 
 //db
-const request = indexedDB.open("MyTestDatabase", 1);
-request.onupgradeneeded = (event) => {
-    const db = request.result;
-    if (!db.objectStoreNames.contains("imu")) {
-        db.createObjectStore("imu", { keyPath: "id" });
-    }
-};
+// const request = indexedDB.open("MyTestDatabase", 1);
+// request.onupgradeneeded = (event) => {
+//     const db = request.result;
+//     if (!db.objectStoreNames.contains("imu")) {
+//         db.createObjectStore("imu", { keyPath: "id" });
+//     }
+// };
 
 function onConnected() {
     document.querySelector('.toggleble').textContent = "Disconnect";

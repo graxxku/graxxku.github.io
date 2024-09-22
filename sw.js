@@ -10,7 +10,8 @@ self.addEventListener("install", evt => {
         "index.html",
         "favicon.ico",
         "manifest.json",
-        "/lib/main.js"
+        "main.js",
+        "style.css"
       ]))
       .catch(err => console.error(err))
     );
