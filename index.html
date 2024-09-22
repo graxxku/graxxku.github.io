@@ -21,11 +21,11 @@
   <body>
     
     <div class="flex flex-col items-center justify-center h-screen">
-      <button onclick="toggleBle()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
-      <button onclick="alarm()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Toggle Alarm</button>
+      <button onclick="toggleBle()" class="w-1/2 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
+      <button onclick="alarm()" class="w-1/2 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Toggle Alarm</button>
 
       <!-- wifi -->
-      <button onclick="wifi()" class="w-1/4 bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect WIFI</button>
+      <button onclick="wifi()" class="w-1/2 bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect WIFI</button>
       <div id="wifiForm" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
         <h2 class="text-2xl font-bold mb-6 text-center">Connect to WiFi</h2>
         <form>
@@ -44,7 +44,7 @@
       </div>
         
       <!-- schedule -->
-      <button onclick="schedule()" class="w-1/4 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
+      <button onclick="schedule()" class="w-1/2 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
       <div id="scheduleForm" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
         <h2 class="text-2xl font-bold mb-6 text-center">Set Alarm Schedule</h2>
           <form id="alarmForm" onsubmit="handleAlarmFormSubmit(event)">
