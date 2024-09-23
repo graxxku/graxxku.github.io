@@ -92,6 +92,11 @@ async function handleWifiFormSubmit(event){
     await ble.writeValue(msg)
 }
 
+async function handleToken(){
+    const token = OneSignal.User.onesignalId
+    const msg = stringToArrayBuffer("token:"+token);
+    await ble.writeValue(msg)
+}
 
 
 function schedule() {
@@ -125,10 +130,4 @@ function stringToArrayBuffer(str) {
     let encoder = new TextEncoder();
     let uint8Array = encoder.encode(str);
     return uint8Array.buffer;
-}
-
-
-function dummy(){
-    console.log("ggg");
-    
 }
