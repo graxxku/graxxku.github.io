@@ -126,3 +126,15 @@ function stringToArrayBuffer(str) {
     let uint8Array = encoder.encode(str);
     return uint8Array.buffer;
 }
+
+function subscribeAndDoMore() {
+    OneSignal.showNativePrompt().then(function() {
+      // Perform additional tasks here
+      console.log("User subscribed to notifications!");
+      // Example: Send a welcome message
+      alert("Thank you for subscribing to notifications!");
+      // Add any other tasks you want to perform
+    }).catch(function(error) {
+      console.error("Subscription failed: ", error);
+    });
+  }

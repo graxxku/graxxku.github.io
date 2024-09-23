@@ -14,6 +14,9 @@
       OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
           appId: "896d776a-cd23-472c-95d7-e10488cfdcd9",
+          notifyButton: {
+            enable: false, // Disable the default OneSignal button
+          },
         });
       });
     </script>
@@ -42,6 +45,9 @@
             </div>
         </form>
       </div>
+
+      <!-- notification -->
+      <button onclick="subscribeAndDoMore()">Subscribe to Notifications</button>
         
       <!-- schedule -->
       <button onclick="schedule()" class="w-1/2 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
@@ -79,26 +85,25 @@
 
     <script>
       //hide notif
-      function waitForElementToExist(id) {
-          return new Promise(resolve => {
-              if (document.getElementById(id)) {
-                  return resolve(document.getElementById(id));
-              }
+      // function waitForElementToExist(id) {
+      //     return new Promise(resolve => {
+      //         if (document.getElementById(id)) {
+      //             return resolve(document.getElementById(id));
+      //         }
 
-              const observer = new MutationObserver(() => {
-                  if (document.getElementById(id)) {
-                      resolve(document.getElementById(id));
-                      observer.disconnect();
-                  }
-              });
+      //         const observer = new MutationObserver(() => {
+      //             if (document.getElementById(id)) {
+      //                 resolve(document.getElementById(id));
+      //                 observer.disconnect();
+      //             }
+      //         });
 
-              observer.observe(document.body, { childList: true, subtree: true });
-          });
-      }
-      waitForElementToExist('onesignal-bell-container').then(element => {
-        document.getElementById('onesignal-bell-container').style.display = 'none';
-      });
-
+      //         observer.observe(document.body, { childList: true, subtree: true });
+      //     });
+      // }
+      // waitForElementToExist('onesignal-bell-container').then(element => {
+      //   document.getElementById('onesignal-bell-container').style.display = 'none';
+      // });
       //sw
       if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('/sw.js')
