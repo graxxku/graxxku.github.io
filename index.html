@@ -45,7 +45,7 @@
       </div>
 
       <!-- notification -->
-      <div class='onesignal-customlink-container'></div>
+      <div class='onesignal-customlink-container' onclick="dummy()"></div>
         
       <!-- schedule -->
       <button onclick="schedule()" class="w-1/2 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
@@ -82,26 +82,6 @@
     </div>
 
     <script>
-      //hide notif
-      // function waitForElementToExist(id) {
-      //     return new Promise(resolve => {
-      //         if (document.getElementById(id)) {
-      //             return resolve(document.getElementById(id));
-      //         }
-
-      //         const observer = new MutationObserver(() => {
-      //             if (document.getElementById(id)) {
-      //                 resolve(document.getElementById(id));
-      //                 observer.disconnect();
-      //             }
-      //         });
-
-      //         observer.observe(document.body, { childList: true, subtree: true });
-      //     });
-      // }
-      // waitForElementToExist('onesignal-bell-container').then(element => {
-      //   document.getElementById('onesignal-bell-container').style.display = 'none';
-      // });
       //sw
       if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('/sw.js')

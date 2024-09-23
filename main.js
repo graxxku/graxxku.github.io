@@ -126,3 +126,9 @@ function stringToArrayBuffer(str) {
     let uint8Array = encoder.encode(str);
     return uint8Array.buffer;
 }
+
+
+function dummy(){
+    console.log("ggg");
+    
+}
