@@ -70,8 +70,7 @@ async function alarm(){
         const msg = stringToArrayBuffer("0");
         await ble.writeValue(msg)
         alarmstatus = false
-    }
-    
+    } 
 }
 
 function wifi(){
@@ -85,6 +84,16 @@ function wifi(){
     }
 }
 
+async function handleWifiFormSubmit(event){
+    event.preventDefault();
+    const ssid = document.getElementById('wifissid').value;
+    const password = document.getElementById('wifipassword').value;
+    const msg = stringToArrayBuffer(ssid+":wf:"+password);
+    await ble.writeValue(msg)
+}
+
+
+
 function schedule() {
     const scheduleForm = document.getElementById('scheduleForm');
     if (scheduleopen) {
@@ -96,7 +105,7 @@ function schedule() {
     }
 }
 
-function handleAlarmFormSubmit(event) {
+async function handleAlarmFormSubmit(event) {
     event.preventDefault();
     const days = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(el => el.value);
     const timeOn = document.getElementById('time_on').value;
@@ -113,10 +122,7 @@ function handleAlarmFormSubmit(event) {
 
 
 function stringToArrayBuffer(str) {
-    // Create a TextEncoder instance
     let encoder = new TextEncoder();
-    // Encode the string into a Uint8Array
     let uint8Array = encoder.encode(str);
-    // Return the buffer property of the Uint8Array
     return uint8Array.buffer;
 }
