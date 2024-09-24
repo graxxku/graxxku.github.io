@@ -5,21 +5,27 @@ let bleDevice = null;
 let shouldConnect = true;
 let scheduleopen = false;
 let wifiopen = false;
+
 let alarmstatus = false;
+let notifsent = false;
+let wificonnected = false;
+let scheduled = false;
 
 
-//db
-// const request = indexedDB.open("MyTestDatabase", 1);
-// request.onupgradeneeded = (event) => {
-//     const db = request.result;
-//     if (!db.objectStoreNames.contains("imu")) {
-//         db.createObjectStore("imu", { keyPath: "id" });
-//     }
-// };
-
-function onConnected() {
+async function onConnected() {
     document.querySelector('.toggleble').textContent = "Disconnect";
     shouldConnect = false;
+    //add while loop to read value from device every 1 second?
+    while (true){
+        let data = ble.readValue();
+        alarmstatus = Boolean(parseInt(data[0]))
+        notifsent = Boolean(parseInt(data[1]))
+        wificonnected = Boolean(parseInt(data[2]))
+        scheduled = Boolean(parseInt(data[3]))
+        console.log(alarmstatus);
+        await sleep(2)
+    }
+    
 }
 
 function onDisconnected() {
