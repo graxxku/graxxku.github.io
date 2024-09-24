@@ -92,10 +92,31 @@ async function handleWifiFormSubmit(event){
     await ble.writeValue(msg)
 }
 
-async function handleToken(){
-    const token = OneSignal.User.onesignalId
-    const msg = stringToArrayBuffer("tkn:"+token+":tkn");
-    await ble.writeValue(msg)
+async function handleToken() {
+    try {
+        const token = OneSignal.User.onesignalId;
+        const msg = `tkn:${token}:tkn`;
+        const chunkSize = 20; // BLE typically supports 20 bytes per write
+        const chunks = splitIntoChunks(msg, chunkSize);
+
+        for (const chunk of chunks) {
+            const arrayBuffer = stringToArrayBuffer(chunk);
+            await writeToCharacteristic(arrayBuffer);
+            await delay(100); // Small delay to ensure the BLE stack processes each chunk
+        }
+
+        console.log("Token sent successfully");
+    } catch (error) {
+        console.error("Error sending token:", error);
+    }
+}
+
+function splitIntoChunks(str, chunkSize) {
+    const chunks = [];
+    for (let i = 0; i < str.length; i += chunkSize) {
+        chunks.push(str.substring(i, i + chunkSize));
+    }
+    return chunks;
 }
 
 
