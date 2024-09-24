@@ -94,7 +94,7 @@ async function handleWifiFormSubmit(event){
 
 async function handleToken(){
     const token = OneSignal.User.onesignalId
-    const msg = stringToArrayBuffer("token:"+token);
+    const msg = stringToArrayBuffer("tkn:"+token+":tkn");
     await ble.writeValue(msg)
 }
 
