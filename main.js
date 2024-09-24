@@ -27,35 +27,33 @@ function onDisconnected() {
     shouldConnect = true;
 }
 
-function toggleBle() {
-    if(shouldConnect){
-        navigator.bluetooth.requestDevice(
-            {
-                acceptAllDevices:true,
-                optionalServices: ['19b10000-e8f2-537e-4f6c-d104768a1214','19b10001-e8f2-537e-4f6c-d104768a1214']
-            })
-            .then(device => {
-                device.addEventListener('gattserverdisconnected', onDisconnected)
-                bleDevice = device;
-                return device.gatt.connect();
-            })
-            .then(server => {
-                return server.getPrimaryService('19b10000-e8f2-537e-4f6c-d104768a1214');
-            })
-            .then(service => {
-                return service.getCharacteristic('19b10001-e8f2-537e-4f6c-d104768a1214');
-            })
-            .then(characteristic => {
-                ble = characteristic;
-                onConnected();
-            })
-            .catch(error => {
-                console.log('Argh! ' + error);
-        });
-    }else{
+async function toggleBle() {
+    if (shouldConnect) {
+        try {
+            const device = await navigator.bluetooth.requestDevice({
+                acceptAllDevices: true,
+                optionalServices: ['19b10000-e8f2-537e-4f6c-d104768a1214', '19b10001-e8f2-537e-4f6c-d104768a1214']
+            });
+
+            device.addEventListener('gattserverdisconnected', onDisconnected);
+            bleDevice = device;
+
+            const server = await device.gatt.connect();
+            await server.requestMtu(512); // Requesting 512-byte MTU size
+
+            const service = await server.getPrimaryService('19b10000-e8f2-537e-4f6c-d104768a1214');
+            const characteristic = await service.getCharacteristic('19b10001-e8f2-537e-4f6c-d104768a1214');
+
+            ble = characteristic;
+            onConnected();
+        } catch (error) {
+            console.log('Argh! ' + error);
+        }
+    } else {
         bleDevice.gatt.disconnect();
-    }    
+    }
 }
+
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
 
