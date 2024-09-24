@@ -101,7 +101,7 @@ async function handleToken() {
 
         for (const chunk of chunks) {
             const arrayBuffer = stringToArrayBuffer(chunk);
-            await writeToCharacteristic(arrayBuffer);
+            await ble.writeValue(arrayBuffer);
             await delay(100); // Small delay to ensure the BLE stack processes each chunk
         }
 
