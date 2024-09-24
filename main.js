@@ -15,17 +15,6 @@ let scheduled = false;
 async function onConnected() {
     document.querySelector('.toggleble').textContent = "Disconnect";
     shouldConnect = false;
-    //add while loop to read value from device every 1 second?
-    while (true){
-        let data = ble.readValue();
-        alarmstatus = Boolean(parseInt(data[0]))
-        notifsent = Boolean(parseInt(data[1]))
-        wificonnected = Boolean(parseInt(data[2]))
-        scheduled = Boolean(parseInt(data[3]))
-        console.log(alarmstatus);
-        await sleep(2)
-    }
-    
 }
 
 function onDisconnected() {
@@ -54,6 +43,10 @@ function toggleBle() {
             .then(characteristic => {
                 ble = characteristic;
                 onConnected();
+                return ble.startNotifications().then(_ => {
+                    ble.addEventListener('characteristicvaluechanged',
+                        handleNotifications);
+                });
             })
             .catch(error => {
                 console.log('Argh! ' + error);
@@ -61,6 +54,11 @@ function toggleBle() {
     }else{
         bleDevice.gatt.disconnect();
     }    
+}
+
+function handleNotifications(event) {
+    let value = event.target.value;
+    console.log(value);
 }
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
