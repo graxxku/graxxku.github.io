@@ -722,10 +722,6 @@ video {
   outline-offset: 2px;
 }
 
-.onesignal-customlink-container {
-  min-height: 0%;
-}
-
 .onesignal-customlink-subscribe.button.medium {
   width: 50dvh;
   text-align: center;
