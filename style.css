@@ -723,6 +723,5 @@ video {
 }
 
 .onesignal-reset {
-  display: block; /* Ensures the button behaves like a block element */
-  width: 100%;    /* Sets the width to 100% of the parent */
+  width: 50dvh;    /* Sets the width to 100% of the parent */
 }
