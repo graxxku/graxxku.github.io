@@ -79,19 +79,19 @@
       golfStick.castShadow = true;
       golfStick.position.y = 5; // Adjust position as needed
 
-      // Optionally, add a handle to the golf stick
-      var handle = new THREE.Mesh(
-          new THREE.CylinderGeometry(0.7, 0.7, 2, 16), // Handle dimensions
-          new THREE.MeshPhongMaterial({color: 'black', shininess: 50})
-      );
-      handle.castShadow = true;
-      handle.position.y = 10; // Position handle on top of the stick
+      // // Optionally, add a handle to the golf stick
+      // var handle = new THREE.Mesh(
+      //     new THREE.CylinderGeometry(0.7, 0.7, 2, 16), // Handle dimensions
+      //     new THREE.MeshPhongMaterial({color: 'black', shininess: 50})
+      // );
+      // handle.castShadow = true;
+      // handle.position.y = 10; // Position handle on top of the stick
 
-      // Add handle to the golf stick
-      golfStick.add(handle);
+      // // Add handle to the golf stick
+      // golfStick.add(handle);
 
 
-      man.r_fingers.attach(handle)
+      man.r_fingers.attach(golfStick)
 
       function animate(t)
       {
