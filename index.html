@@ -9,7 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/main.js"></script>
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(async function(OneSignal) {
@@ -21,7 +20,7 @@
   </head>
   <body>
     <!-- notification -->
-    <div class='onesignal-customlink-container flex justify-center items-center' onclick="handleToken()"></div>
+    
     
     <div class="flex flex-col items-center justify-center h-dvh">
       <button onclick="toggleBle()" class="w-1/2 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Connect</button>
@@ -45,6 +44,8 @@
             </div>
         </form>
       </div>
+
+      <div class='onesignal-customlink-container flex justify-center items-center' onclick="handleToken()"></div>
         
       <!-- schedule -->
       <button onclick="schedule()" class="w-1/2 toggleble bg-blue-500 text-white px-4 py-2 rounded mb-4">Schedule</button>
