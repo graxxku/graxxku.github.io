@@ -66,14 +66,32 @@
       switchposition = false;
       shouldswitch = false;
 
-      var bracelet = new THREE.Mesh(
-          new THREE.CylinderGeometry(3,3,1,16),	
-          new THREE.MeshPhongMaterial({color:'crimson',shininess:200})
+      // var bracelet = new THREE.Mesh(
+      //     new THREE.CylinderGeometry(3,3,1,16),	
+      //     new THREE.MeshPhongMaterial({color:'crimson',shininess:200})
+      // );
+      // bracelet.castShadow = true;
+      // bracelet.position.y = 6;
+      var golfStick = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.5, 0.5, 10, 16), // Adjust dimensions for a golf stick shape
+          new THREE.MeshPhongMaterial({color: 'silver', shininess: 100})
       );
-      bracelet.castShadow = true;
-      bracelet.position.y = 6;
+      golfStick.castShadow = true;
+      golfStick.position.y = 5; // Adjust position as needed
 
-      man.r_fingers.attach(bracelet)
+      // Optionally, add a handle to the golf stick
+      var handle = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.7, 0.7, 2, 16), // Handle dimensions
+          new THREE.MeshPhongMaterial({color: 'black', shininess: 50})
+      );
+      handle.castShadow = true;
+      handle.position.y = 10; // Position handle on top of the stick
+
+      // Add handle to the golf stick
+      golfStick.add(handle);
+
+
+      man.r_fingers.attach(golfStick)
 
       function animate(t)
       {
