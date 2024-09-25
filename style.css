@@ -725,12 +725,4 @@ video {
 .onesignal-reset {
   display: block; /* Ensures the button behaves like a block element */
   width: 100%;    /* Sets the width to 100% of the parent */
-  height: 100%;   /* Sets the height to 100% of the parent */
-  border: none;   /* Removes any default border */
-  padding: 0;     /* Removes any default padding */
-  margin: 0;      /* Removes any default margin */
-  background-color: #04AA6D; /* Example background color */
-  color: white;   /* Example text color */
-  text-align: center; /* Centers the text */
-  cursor: pointer; /* Changes the cursor to a pointer on hover */
 }
