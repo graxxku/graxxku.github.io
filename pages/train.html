@@ -65,16 +65,6 @@
       man.r_fingers.bend = 45
       switchposition = false;
       shouldswitch = false;
-      // var golfStick = new THREE.Mesh(
-      //     new THREE.CylinderGeometry(0.5, 0.5, 10, 16), // Adjust dimensions for a golf stick shape
-      //     new THREE.MeshPhongMaterial({color: 'black', shininess: 100})
-      // );
-      // golfStick.castShadow = true;
-      // golfStick.position.y = 6; // Adjust position as needed
-      // golfStick.rotation.y = -2
-
-
-      // man.r_fingers.attach(golfStick)
 
       function animate(t)
       {
@@ -91,9 +81,9 @@
 
 
         if(switchposition){
-          man.posture = Mannequin.blend(G_UA, G_UC, k);
+          man.posture = Mannequin.blend(G_A, G_C, k);
         }else{
-          man.posture = Mannequin.blend(G_UA, G_UB, k);
+          man.posture = Mannequin.blend(G_A, G_B, k);
         }
       }
     </script>
