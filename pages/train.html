@@ -61,35 +61,12 @@
     
 
     <!-- animation -->
-    <!-- <script>
+    <script>
       createScene();
-      man = new Male();
+      const man = new Male();
       man.rotation.y = 20;
       man.r_fingers.bend = 45
-      switchposition = false;
-      shouldswitch = false;
-
-      function animate(t)
-      {
-        var k = THREE.MathUtils.clamp(0.5 + 0.6 * sin(t*speed), 0, 1);
-
-        if(k==1){
-          shouldswitch = true;
-        }
-
-        if(k==0 && shouldswitch){
-          switchposition = !switchposition;
-          shouldswitch = false;
-        }
-
-
-        if(switchposition){
-          man.posture = Mannequin.blend(G_A, G_C, k);
-        }else{
-          man.posture = Mannequin.blend(G_A, G_B, k);
-        }
-      }
-    </script> -->
+    </script>
 
   </body>
 </html>
