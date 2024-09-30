@@ -3,7 +3,7 @@
   "host": "graxxku.github.io",
   "name": "Graxx Sport",
   "launcherName": "GraxxSport",
-  "display": "standalone",
+  "display": "fullscreen",
   "themeColor": "#54B95F",
   "themeColorDark": "#000000",
   "navigationColor": "#000000",
@@ -19,8 +19,8 @@
     "path": "C:\\Users\\user\\Desktop\\graxxku.github.io\\android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1",
-  "appVersionCode": 1,
+  "appVersionName": "2",
+  "appVersionCode": 2,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://graxxku.github.io/manifest.json",
@@ -42,5 +42,5 @@
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": "1"
+  "appVersion": "2"
 }
