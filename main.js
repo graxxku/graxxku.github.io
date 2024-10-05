@@ -4,7 +4,6 @@ let ble = null;
 let bleDevice = null;
 let shouldConnect = true;
 let scheduleopen = false;
-let wifiopen = false;
 
 let alarmstatus = false;
 let notifsent = false;
@@ -56,10 +55,17 @@ function toggleBle() {
     }    
 }
 
-let tes
-function handleNotifications(event) {
-    tes= event.target.value;
 
+function handleNotifications(event) {
+    const temp = event.target.value;
+    const utf8Decoder = new TextDecoder('utf-8');
+    const decoded = utf8Decoder.decode(temp);
+    const bool = stringToBooleanArray(decoded);
+
+    alarmstatus = bool[0];
+    notifsent = bool[1];
+    wificonnected = bool[2];
+    scheduled = bool[3];
 }
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
@@ -69,23 +75,19 @@ async function alarm(){
         document.querySelector('.togglealarm').textContent = "Alarm: On";
         const msg = stringToArrayBuffer("1");
         await ble.writeValue(msg)
-        alarmstatus = true
     }else{
         document.querySelector('.togglealarm').textContent = "Alarm: Off";
         const msg = stringToArrayBuffer("0");
         await ble.writeValue(msg)
-        alarmstatus = false
     } 
 }
 
 function wifi(){
     const wifiForm = document.getElementById('wifiForm');
-    if(wifiopen){
+    if(wificonnected){
         wifiForm.classList.add('hidden');
-        wifiopen = false;
     }else{
         wifiForm.classList.remove('hidden');
-        wifiopen = true;
     }
 }
 
@@ -156,4 +158,12 @@ function stringToArrayBuffer(str) {
     let encoder = new TextEncoder();
     let uint8Array = encoder.encode(str);
     return uint8Array.buffer;
+}
+
+function stringToBooleanArray(str) {
+    // Split the string into an array of characters
+    let charArray = str.split('');
+    // Convert each character to a boolean
+    let booleanArray = charArray.map(char => char === '1');
+    return booleanArray;
 }
