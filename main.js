@@ -69,6 +69,7 @@ function handleNotifications(event) {
     notifsent = bool[1];
     wificonnected = bool[2];
     scheduled = bool[3];
+
 }
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
