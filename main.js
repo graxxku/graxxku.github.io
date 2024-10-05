@@ -62,6 +62,9 @@ function handleNotifications(event) {
     const decoded = utf8Decoder.decode(temp);
     const bool = stringToBooleanArray(decoded);
 
+    console.log(bool);
+    
+
     alarmstatus = bool[0];
     notifsent = bool[1];
     wificonnected = bool[2];
