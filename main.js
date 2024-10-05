@@ -97,8 +97,10 @@ function wifi(){
     const wifiForm = document.getElementById('wifiForm');
     if(wifiopen){
         wifiForm.classList.add('hidden');
+        wifiopen = false;
     }else{
         wifiForm.classList.remove('hidden');
+        wifiopen = true;
     }
 }
 
