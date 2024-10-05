@@ -57,8 +57,13 @@ function toggleBle() {
 }
 
 function handleNotifications(event) {
-    let value = event.target.value;
-    console.log(value);
+    let buffer = event.target.value;
+    // Convert DataView to Int8Array
+    const int8Array = new Int8Array(buffer.byteLength);
+    for (let i = 0; i < buffer.byteLength; i++) {
+        int8Array[i] = dataView.getInt8(i);
+    }
+    console.log(int8Array);
 }
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
