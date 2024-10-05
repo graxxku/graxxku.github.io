@@ -76,13 +76,15 @@ const sleep = ms => new Promise(res => setTimeout(res, ms));
 
 async function alarm(){
     if(alarmstatus == false){
-        document.querySelector('.togglealarm').textContent = "Alarm: On";
+        
         const msg = stringToArrayBuffer("1");
         await ble.writeValue(msg)
+        document.querySelector('.togglealarm').textContent = "Alarm: On";
     }else{
-        document.querySelector('.togglealarm').textContent = "Alarm: Off";
+        
         const msg = stringToArrayBuffer("0");
         await ble.writeValue(msg)
+        document.querySelector('.togglealarm').textContent = "Alarm: Off";
     } 
 }
 
