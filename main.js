@@ -89,8 +89,10 @@ async function alarm(){
 function wifi(){
     const wifiForm = document.getElementById('wifiForm');
     if(wificonnected){
+        document.querySelector('.togglewifi').textContent = "WIFI connected";
         wifiForm.classList.add('hidden');
     }else{
+        document.querySelector('.togglewifi').textContent = "Connect WIFI";
         wifiForm.classList.remove('hidden');
     }
 }
