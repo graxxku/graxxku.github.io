@@ -4,6 +4,7 @@ let ble = null;
 let bleDevice = null;
 let shouldConnect = true;
 let scheduleopen = false;
+let wifiopen = false;
 
 let alarmstatus = false;
 let notifsent = false;
@@ -70,18 +71,22 @@ function handleNotifications(event) {
     wificonnected = bool[2];
     scheduled = bool[3];
 
+    if(wificonnected){
+        document.querySelector('.togglewifi').textContent = "WIFI connected";
+    }else if(! wificonnected){
+        document.querySelector('.togglewifi').textContent = "Connect WIFI";
+    }
+
 }
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
 
 async function alarm(){
     if(alarmstatus == false){
-        
         const msg = stringToArrayBuffer("1");
         await ble.writeValue(msg)
         document.querySelector('.togglealarm').textContent = "Alarm: On";
     }else{
-        
         const msg = stringToArrayBuffer("0");
         await ble.writeValue(msg)
         document.querySelector('.togglealarm').textContent = "Alarm: Off";
@@ -90,11 +95,9 @@ async function alarm(){
 
 function wifi(){
     const wifiForm = document.getElementById('wifiForm');
-    if(wificonnected){
-        document.querySelector('.togglewifi').textContent = "WIFI connected";
+    if(wifiopen){
         wifiForm.classList.add('hidden');
     }else{
-        document.querySelector('.togglewifi').textContent = "Connect WIFI";
         wifiForm.classList.remove('hidden');
     }
 }
