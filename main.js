@@ -26,7 +26,7 @@ function toggleBle() {
     if(shouldConnect){
         navigator.bluetooth.requestDevice(
             {
-                acceptAllDevices:true,
+                filters: [{ name: 'Graxx Alert' }],
                 optionalServices: ['19b10000-e8f2-537e-4f6c-d104768a1214','19b10001-e8f2-537e-4f6c-d104768a1214']
             })
             .then(device => {
